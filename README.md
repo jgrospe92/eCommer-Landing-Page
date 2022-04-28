@@ -13,6 +13,8 @@
   - Public JavaScript functions and objects
   - An open source CSS framework: (*Bootstrap*)
   - An open source vector-based icons framework: (*Font Awesome*)
+- # TODO List
+- Check this [link](TODO.md) to see the TODO list.
 
 # WireFrame
 ## Desktop
@@ -21,3 +23,4 @@
 
 ## Mobile version
 ![desktop wireframe](wireframe/Wireframe_Mobile.png)
+
