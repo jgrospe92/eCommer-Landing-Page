@@ -121,7 +121,7 @@ function showListOfItems() {
         mainContainer.innerHTML += content;
         initDetails(`moreDetails${i}`,item);
         // DEBUG:
-        console.log(`moreDetails${i}`);
+        //console.log(`moreDetails${i}`);
         
     }
    
@@ -211,6 +211,8 @@ function hideStatusMessage() {
 function viewCart() {
     // TODO:
     clearContainer();
+    // DEBUG:
+    console.log("cleared items")
 }
 
 // REFACTOR: Find item using Id in the catalog array. Returns the matched item
