@@ -93,15 +93,23 @@ function initializeItems() {
 
 // REFACTOR:
 function clearContainer() {
-    document.getElementById('divContainer').innerHTML = "";
+    //document.getElementById('divContainer').innerHTML = "";
     //DEBUG:
+    showOrHideContainer('none');
     console.log("cleared container")
+}
+
+function showOrHideContainer(status){
+    var container = document.getElementById('divContainer');
+    container.style.display = status
+    showOrHideTable('none');
+
 }
 
 // REFACTOR: A dummy function
 function showListOfItems() {
 
-    clearContainer();
+    //clearContainer();
     let mainContainer = document.getElementById('divContainer');
 
     for (let i = 1; i < catalogs.length; i++) {
@@ -210,9 +218,39 @@ function hideStatusMessage() {
 // REFACTOR: Display the content of the shopping cart, Contains the list that has been added to the cart
 function viewCart() {
     // TODO:
-    clearContainer();
+    var container = document.getElementById('divContainer');
+    container.style.display = 'none';
+    showOrHideTable('flex')
     // DEBUG:
-    console.log("cleared items")
+    showItemInCart();
+}
+function showItemInCart(){
+    let oldTable = document.getElementById('tableBody');
+    oldTable.innerHTML = "";
+    let newTableBody = document.getElementById('tableBody');
+    // DEBUG:
+   
+    for (const item of cart){
+        let content = `<tr><th scope="row">${item.id}</th><td>${item.title}</td>`;
+        content += `<td>${item.description}</td><td>$199</td>`;
+        content += `<td class="w-25 col-sm-"><img class="w-25 col-sm-" src="${item.thumbnail}${item.id}.jpg" alt=""></td>`;
+        content += '<td class="w-25"><button class="btn btn-danger ">REMOVE</button>';
+        content += '<button onclick="" class="btn btn-info">DETAILS</button></td></tr>';
+        
+        newTableBody.innerHTML += content;
+        // DEBUG:
+        console.log(item);
+    // TODO: view details btn
+
+    }
+ 
+    
+}
+
+// NOTE: showOrHideTable
+function showOrHideTable(status){
+    var tableElement = document.getElementById('cart-table');
+    tableElement.style.display = status;
 }
 
 // REFACTOR: Find item using Id in the catalog array. Returns the matched item
@@ -236,14 +274,15 @@ function showItemDetails(itemId) {
 // REFACTOR: Takes item ID and add selected item to the cart
 function addToCart(itemId) {
     // TODO:
-
+    
     let currentItem = findItemById(itemId);
     // DEBUG:
     console.log(currentItem.quantity);
     if (currentItem.quantity > 0){
         showStatusMessage('alert-success', 'SUCCESS', ' item added !',currentItem.id);
-        catalogs.push[currentItem];
+        cart.push(currentItem);
         --currentItem.quantity;
+        console.log('size ' + cart.length);
         // NOTE: updates the value
        document.getElementById('quantity'+currentItem.id).innerHTML = 'Quantity: '+currentItem.quantity;
        
@@ -267,6 +306,8 @@ function searchByKeyWord() {
     // TODO:
 }
 
+
+
 // REFACTOR:
 
 // NOTE: Sets up the webpage for the user: Used onLoad body event.
@@ -274,6 +315,7 @@ function setUpCart() {
     initializeCategories();
     initializeItems();
     showListOfItems();
+    showOrHideContainer('flex');
    //hideStatusMessage();
 
 }

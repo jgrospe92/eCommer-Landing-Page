@@ -60,7 +60,7 @@
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
                 <h1 class="display-4 fw-bolder">Premium Quality Images</h1>
-                
+
                 <p class="lead fw-normal text-white-50 mb-0">Buy the most iconic images right here!</p>
             </div>
         </div>
@@ -70,7 +70,8 @@
         <!-- NOTE: Catalogue and search field-->
         <div class="px-4 px-lg-5">
             <nav class="navbar navbar-light bg-light justify-content-between">
-                <button onclick="showListOfItems()" type="button" class="btn btn-outline-dark align-top">Catalogue</button>
+                <button onclick="showOrHideContainer('flex')" type="button"
+                    class="btn btn-outline-dark align-top">Catalogue</button>
                 <form class="form-inline">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search for items"
                         aria-label="Search">
@@ -80,9 +81,37 @@
         </div>
         <!-- NOTE: The container for the items -->
         <div class="container  px-4 px-lg-5 mt-5">
+            <!-- NOTE: CART TABLE -->
+            <div id="cart-table">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Item ID</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Price</th>
+                            <th scope="col" class="">Display</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- <tr>
+                            <th scope="row">1</th>
+                            <td>Child Play</td>
+                            <td>Lorem iposum bask dheal</td>
+                            <td>$199</td>
+                            <td><img src="images/thumbnails/image1.jpg" alt=""></td>
+                            <td class="w-25"><button class="btn btn-danger ">REMOVE</button>
+                                <button class="btn btn-info">DETAILS</button>
+                            </td>
+                        </tr> -->
+                    </tbody>
+                </table>
+            </div>
             <!-- NOTE: divContainer -->
             <div id="divContainer"
                 class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-3 justify-content-center">
+
 
             </div>
         </div>
