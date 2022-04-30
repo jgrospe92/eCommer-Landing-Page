@@ -16,6 +16,10 @@
 - # TODO List
 - Check this [link](TODO.md) to see the TODO list.
 
+# PROTOTYPE WEBSITE
+[![Netlify Status](https://api.netlify.com/api/v1/badges/bf81a3fd-ac11-41bc-9bb8-3ffabbc92c1f/deploy-status)](https://app.netlify.com/sites/ecom-photography-store/deploys)
+[LIVE](https://ecom-photography-store.netlify.app)
+
 # WireFrame
 ## Desktop
 ![desktop wireframe](wireframe/WireFrameShopPage.png)
