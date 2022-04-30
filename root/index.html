@@ -23,36 +23,40 @@
 <body>
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="#!">Jeffrey Grospe</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                    <!-- <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">About</a></li> -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#!">All Products</a></li>
-                            <li>
-                                <hr class="dropdown-divider" />
-                            </li>
-                            <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                            <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <form class="d-flex">
-                    <button onclick="viewCart()" class="btn btn-outline-dark" type="submit">
-                        <i class="bi-cart-fill me-1"></i>
-                        Cart
-                        <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                    </button>
-                </form>
-            </div>
+        <a class="navbar-brand" href="#">Jeffrey Grospe</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Portfolio</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Shop Arts
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Best Seller</a>
+                        <a class="dropdown-item" href="#">New</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Sale</a>
+                    </div>
+                </li>
+            </ul>
+            <form class="d-flex">
+                <button onclick="viewCart()" type="button" class="btn btn-outline-dark">
+                    <i class="bi-cart-fill me-1"></i>
+                    Cart
+                    <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                </button>
+            </form>
         </div>
     </nav>
     <!-- Header-->
@@ -60,7 +64,6 @@
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
                 <h1 class="display-4 fw-bolder">Premium Quality Images</h1>
-
                 <p class="lead fw-normal text-white-50 mb-0">Buy the most iconic images right here!</p>
             </div>
         </div>
@@ -80,7 +83,7 @@
             </nav>
         </div>
         <!-- NOTE: The container for the items -->
-        <div class="container  px-4 px-lg-5 mt-5">
+        <div class=" px-4 px-lg-5 mt-5">
             <!-- NOTE: CART TABLE -->
             <div id="cart-table">
                 <table class="table table-striped">
@@ -111,22 +114,20 @@
             <!-- NOTE: divContainer -->
             <div id="divContainer"
                 class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-3 justify-content-center">
-
-
             </div>
         </div>
     </section>
     <!-- Footer-->
     <footer class="py-5 bg-dark">
         <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; jeffrey grospe online shop 2022</p>
+            <p class="m-0 text-center text-white">Copyright &copy; Jeffrey Grospe online shop 2022</p>
         </div>
     </footer>
     <!-- Bootstrap core JS-->
     <!-- Core theme JS-->
     <script src="js/scripts.js"></script>
-    <script src="js/Category.js"></script>
     <script src="js/bootstrap.js"></script>
+    <script src="js/Category.js"></script>
 </body>
 
 </html>

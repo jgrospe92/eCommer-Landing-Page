@@ -53,8 +53,6 @@ function initializeCategories() {
     const category7 = new Category('c7', 'Macro', 'Be amaze of the small things');
     const category8 = new Category('c8', 'Nature', 'Time to connect with Mother earth and disconnect yourself from stress');
     categories = [category1, category2, category3, category4, category5, category6, category7, category8];
-    // DEBUG:
-    console.log(categories[0].Test());
 }
 
 function initializeItems() {
@@ -94,7 +92,10 @@ function initializeItems() {
 // REFACTOR:
 function clearContainer() {
     //document.getElementById('divContainer').innerHTML = "";
+
     //DEBUG:
+
+    // NOTE: Using display to hide elements
     showOrHideContainer('none');
     console.log("cleared container")
 }
@@ -114,8 +115,8 @@ function showListOfItems() {
 
     for (let i = 1; i < catalogs.length; i++) {
         let item = catalogs[i - 1];
-        let content = '<div class="col mb-5"><div class="card h-100">';
-        content += `<img class="card-img-top" src="${item.thumbnail+item.id}.jpg" alt="..." />`;
+        let content = '<div class="col mb-5"><div class="card ">';
+        content += `<img class="card-img-top p-3" src="${item.thumbnail+item.id}.jpg" alt="..." />`;
         content += '<div class="card-body p-4 "><i class="fa fa-heart-o" aria-hidden="true"></i>';
         content += `<div class="text-center"><h5 id="priceTag${i}" class="fw-bolder">${item.title}</h5>$${item.unitPrice}`;
         content += `<p id="quantity${i}" class="small">Quantity: ${item.quantity} </p>`
@@ -135,7 +136,7 @@ function showListOfItems() {
    
 }
 
-// NOTE: populate viewDetails and show's details
+// NOTE: populate viewDetails and show's details, item is an object
 function initDetails(htmlID, item){
     let currentItem = item;
     let mainContainer = document.getElementById(htmlID);
@@ -150,15 +151,19 @@ function initDetails(htmlID, item){
     content += '<span aria-hidden="true">&times;</span></button></div>';
     content += '<div class="modal-body">';
     content += `<img src="${currentItem.thumbnail}${item.id}.jpg" class="card-img-top w-50 float-left" alt="">`
-    content += '<div class="card-body pl-4 text-center">';
+    content += '<div class="card-body text-center">';
     content += `<p class="card-text p-0 m-0">Artist:${currentItem.brand}</p>`;
     content += `<p class="card-text p-0 m-0">Description:${currentItem.description}</p>`;
     content += `<p class="card-text p-0 m-0">Publisher:${currentItem.make}</p>`;
     content += `<p class="card-text p-0 m-0">Category:${currentItem.category.categoryName}</p>`;
-
+    // RATING
+    content += '<div class="d-flex justify-content-center small text-warning mb-2">';
+    content += '<hr><p>Rating</p>';
+    content += ' <div class="bi-star-fill"></div> <div class="bi-star-fill"></div> <div class="bi-star-fill"></div>';
+    content += ' <div class="bi-star-fill"></div> <div class="bi-star-fill"></div></div>';
     content += '</div></div>';
     // closing modal-body
-    content += `<p class="text-left pl-2 ml-2"> PRICE:$${currentItem.unitPrice}</p>`
+    content += `<p class="text-left pl-2 ml-2 mb-0"> PRICE:$${currentItem.unitPrice}</p>`
     content += `<div id="alertModal${item.id}"></div>`;
     content += '<div class="modal-footer">'
     content += '<button type="button" class="btn btn-secondary"data-dismiss="modal">Close</button>';
@@ -202,8 +207,6 @@ function showStatusMessageModal(idClass, header, messageToDisplay, cssClass) {
    },timeOutForMsg);
    
 }
-// DEBUG:
-//showStatusMessage('alert-success', 'SUCCESS', ' Item added!');
 
 // REFACTOR: Hides status alert
 function hideStatusMessage() {
@@ -236,11 +239,12 @@ function showItemInCart(){
         content += `<td class="w-25 col-sm-"><img class="w-25 col-sm-" src="${item.thumbnail}${item.id}.jpg" alt=""></td>`;
         content += '<td class="w-25"><button class="btn btn-danger ">REMOVE</button>';
         content += '<button onclick="" class="btn btn-info">DETAILS</button></td></tr>';
+        content += `<div id="moreDetails${item.id}" class="row"></div>`;
         
         newTableBody.innerHTML += content;
         // DEBUG:
         console.log(item);
-    // TODO: view details btn
+    // TODO: view details btn 
 
     }
  
@@ -268,6 +272,11 @@ function findItemById(itemId) {
 // REFACTOR: Takes item ID and display details of the matched item
 function showItemDetails(itemId) {
     // TODO:
+    for (let i = 0; i < cart.length; i++){
+        if(cart[i].id == itemId){
+            //initDetails( ,cart[i])
+        }
+    }
     
 }
 
@@ -282,6 +291,7 @@ function addToCart(itemId) {
         showStatusMessage('alert-success', 'SUCCESS', ' item added !',currentItem.id);
         cart.push(currentItem);
         --currentItem.quantity;
+        // DEBUG:
         console.log('size ' + cart.length);
         // NOTE: updates the value
        document.getElementById('quantity'+currentItem.id).innerHTML = 'Quantity: '+currentItem.quantity;
