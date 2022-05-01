@@ -69,23 +69,25 @@
         </div>
     </header>
     <!-- Section-->
-    <section  class="py-5">
+    <section class="py-5">
         <!-- NOTE: Catalogue and search field-->
         <div id="searchAlert" class="px-4 px-lg-5">
             <nav class="navbar navbar-light bg-light justify-content-between">
-                <button onclick="showOrHideContainer('flex')" type="button"
+                <button onclick="showListOfItems()" type="button"
                     class="btn btn-outline-dark align-top">Catalogue</button>
-                <form class="d-flex justify-content-start" >
+                <form class="d-flex justify-content-start">
                     <input id="searchInput" class="form-control mr-sm-2" type="text" placeholder="Search for items"
                         aria-label="Search">
-                    <button type="button" onclick="searchByKeyWord()" class="btn btn-outline-success mx-2">Search <i class="fas fa-search-plus fa-sm"></i></button>
+                    <button type="button" id="btnSearch" onclick="searchByKeyWord()" class="btn btn-outline-success mx-2 ">Search <i
+                            class="fas fa-search-plus fa-sm"></i></button>
                 </form>
             </nav>
         </div>
         <!-- NOTE: The container for the items -->
-        <div class=" px-4 px-lg-5 mt-5">
+        <div id="tableContainer" class="px-4 px-lg-5 mt-5">
             <!-- NOTE: CART TABLE -->
-            <div id="cart-table">
+            <!-- <div id="cart-table">
+               
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -98,7 +100,7 @@
                         </tr>
                     </thead>
                     <tbody id="tableBody">
-                        <!-- <tr>
+                        <tr>
                             <th scope="row">1</th>
                             <td>Child Play</td>
                             <td>Lorem iposum bask dheal</td>
@@ -107,15 +109,15 @@
                             <td class="w-25"><button class="btn btn-danger ">REMOVE</button>
                                 <button class="btn btn-info">DETAILS</button>
                             </td>
-                        </tr> -->
+                        </tr> 
                     </tbody>
-                </table>
-            </div>
-            <!-- NOTE: divContainer -->
-            <div id="divContainer"
-                class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-3 justify-content-center">
-            </div>
+                </table> 
+            </div> -->
         </div>
+        <!-- NOTE: divContainer -->
+        <div id="divContainer" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-3 justify-content-center">
+        </div>
+
     </section>
     <!-- Footer-->
     <footer class="py-5 bg-dark">

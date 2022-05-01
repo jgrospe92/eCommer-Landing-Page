@@ -108,14 +108,16 @@ function resetContainer(){
 function showOrHideContainer(status){
     var container = document.getElementById('divContainer');
     container.style.display = status
-    showOrHideTable('none');
+    //showOrHideTable('none');
 
 }
 
 // REFACTOR: A dummy function
 function showListOfItems() {
-
-    //clearContainer();
+    clearCart();
+    resetContainer();
+    enabledSearchBtn();
+    
     let mainContainer = document.getElementById('divContainer');
 
     for (let i = 1; i < catalogs.length; i++) {
@@ -262,34 +264,36 @@ function hideStatusMessage() {
 // REFACTOR: Display the content of the shopping cart, Contains the list that has been added to the cart
 function viewCart() {
     // TODO:
-    var container = document.getElementById('divContainer');
-    container.style.display = 'none';
-    showOrHideTable('flex')
-    // DEBUG:
+    clearCart();
     showItemInCart();
+    disableButton('btnSearch');
 }
 function showItemInCart(){
-    let oldTable = document.getElementById('tableBody');
-    oldTable.innerHTML = "";
-    let newTableBody = document.getElementById('tableBody');
-    // DEBUG:
-   
+    resetContainer();
+    let mainContainer = document.getElementById('tableContainer');
+    let content = '<div id="cart-table"><table class="table table-striped">';
+        content += '<thead><tr><th scope="col">Item ID</th><th scope="col">Title</th>';
+        content += '<th scope="col">Description</th><th scope="col">Price</th><th scope="col" class="">Display</th>';
+        content += '<th scope="col"></th></tr></thead><tbody id="tableBody"></tbody></div></div>';
+
+    mainContainer.innerHTML += content;
+    let tableBody = document.getElementById('tableBody');
     for (const item of cart){
-        let content = `<tr><th scope="row">${item.id}</th><td>${item.title}</td>`;
-        content += `<td>${item.description}</td><td>$199</td>`;
-        content += `<td class="w-25 col-sm-"><img class="w-25 col-sm-" src="${item.thumbnail}${item.id}.jpg" alt=""></td>`;
-        content += '<td class="w-25"><button class="btn btn-danger ">REMOVE</button>';
-        content += '<button onclick="" class="btn btn-info">DETAILS</button></td></tr>';
-        content += `<div id="moreDetails${item.id}" class="row"></div>`;
+        let table = `<tr><th scope="row">${item.id}</th><td>${item.title}</td>`;
+        table += `<td>${item.description}</td><td>$${item.unitPrice}</td>`;
+        table += `<td class="w-25 col-sm-"><img class="w-25 col-sm-" src="${item.thumbnail}${item.id}.jpg" alt=""></td>`;
+        table += '<td class="w-25"><button class="btn btn-danger ">REMOVE</button>';
+        table += '<button onclick="" class="btn btn-info">DETAILS</button></td></tr>';
+        table += `<div id="moreDetails${item.id}" class="row"></div>`;
         
-        newTableBody.innerHTML += content;
+        tableBody.innerHTML += table;
         // DEBUG:
         console.log(item);
-    // TODO: view details btn 
-
     }
- 
-    
+}
+// NOTE: CLEAR CART
+function clearCart(){
+    document.getElementById('tableContainer').innerHTML = "";
 }
 
 // NOTE: showOrHideTable
@@ -348,6 +352,14 @@ function addToCart(itemId) {
 
     }
 }
+
+function enabledSearchBtn(){
+    document.getElementById('btnSearch').className = "btn btn-outline-success mx-2";
+}
+
+function disableButton(idClass){
+    document.getElementById(idClass).classList.add('disabled');
+}
 function updateItemsInCart(op){
     switch (op){
         case 'add':
@@ -381,13 +393,13 @@ function searchByKeyWord() {
         items.description.toLowerCase().includes(value))
     });
 
-    if(isFound === true){
-        showStatusMessageClosable("alert-success","RESET","",'searchAlert');
+    if(filteredItems.length >= 0){
+        showStatusMessageClosable("alert-success","FOUND!","item(s) available",'searchAlert');
     }
 
     showListOfItemsFiltered(filteredItems);
 
-    if (filteredItems.length == 0 && isFound){
+    if (filteredItems.length == 0){
     showStatusMessageClosable("alert-warning","Invalid",value+" doesn't exist!",'searchAlert');
     resetContainer();
     showListOfItems();
@@ -405,10 +417,13 @@ $(function() {
 
 // NOTE: Sets up the webpage for the user: Used onLoad body event.
 function setUpCart() {
+    resetContainer();
+    clearCart();
     initializeCategories();
     initializeItems();
     showListOfItems();
-    showOrHideContainer('flex');
+    
+    //showOrHideContainer('flex');
     // NOTE: INITIALIZE number of items in the cart;
     initNumItemsInCart();
    //hideStatusMessage();
@@ -421,5 +436,3 @@ function initNumItemsInCart(){
 
 // DEBUG: REFACTOR:
 window.addEventListener("load", setUpCart());
-
-
