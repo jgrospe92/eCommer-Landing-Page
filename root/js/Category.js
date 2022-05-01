@@ -133,7 +133,6 @@ function showListOfItems() {
         content += `<div id="moreDetails${i}" class="row"></div>`;
         content += '</div></div>'
 
-        // <i class="bi-question-circle-fill px-2 align-self-end"></i>
         mainContainer.innerHTML += content;
         initDetails(`moreDetails${i}`,item);
         // DEBUG:
@@ -268,6 +267,7 @@ function viewCart() {
     showItemInCart();
     disableButton('btnSearch');
 }
+// NOTE: SHORT item in cart
 function showItemInCart(){
     resetContainer();
     let mainContainer = document.getElementById('tableContainer');
@@ -282,15 +282,53 @@ function showItemInCart(){
         let table = `<tr><th scope="row">${item.id}</th><td>${item.title}</td>`;
         table += `<td>${item.description}</td><td>$${item.unitPrice}</td>`;
         table += `<td class="w-25 col-sm-"><img class="w-25 col-sm-" src="${item.thumbnail}${item.id}.jpg" alt=""></td>`;
-        table += '<td class="w-25"><button class="btn btn-danger ">REMOVE</button>';
-        table += '<button onclick="" class="btn btn-info">DETAILS</button></td></tr>';
-        table += `<div id="moreDetails${item.id}" class="row"></div>`;
+        table += `<td id="moreDetails${item.id}" class="w-25"><button class="btn btn-danger ">REMOVE</button>`;
+        table += '</td></tr>';
+        
         
         tableBody.innerHTML += table;
         // DEBUG:
-        console.log(item);
+        showItemDetails(`moreDetails${item.id}`,item)
+        console.log("this is inside the cart " + item.id);
     }
 }
+// NOTE: viewDEtails in cart
+// REFACTOR: Takes item ID and display details of the matched item
+function showItemDetails(htmlID,item) {
+let currentItem = item;
+    let mainContainer = document.getElementById(htmlID);
+    let content = `<button type="button" class="btn btn-info mx-2" data-toggle="modal" data-target="#modalNum${currentItem.id}">`;
+    content += 'DETAILS</button>';
+    // NOTE: MODAL body
+    content += `<div class="modal fade" id="modalNum${currentItem.id}" tabindex="-1" role="dialog"aria-labelledby="exampleModalCenterTitle" aria-hidden="true">`;
+    content += '<div class="modal-dialog modal-dialog-centered" role="document">';
+    content += '<div class="modal-content"><div class="modal-header">';
+    content += `<h5 class="modal-title" id="exampleModalLongTitle">${currentItem.title}</h5>`;
+    content += '<button type="button" class="close" data-dismiss="modal" aria-label="Close">';
+    content += '<span aria-hidden="true">&times;</span></button></div>';
+    content += '<div class="modal-body">';
+    content += `<img src="${currentItem.thumbnail}${item.id}.jpg" class="card-img-top w-50 float-left" alt="">`
+    content += '<div class="card-body text-center">';
+    content += `<p class="card-text p-0 m-0">Artist:${currentItem.brand}</p>`;
+    content += `<p class="card-text p-0 m-0">Description:${currentItem.description}</p>`;
+    content += `<p class="card-text p-0 m-0">Publisher:${currentItem.make}</p>`;
+    content += `<p class="card-text p-0 m-0">Category:${currentItem.category.categoryName}</p>`;
+    // RATING
+    content += '<div class="d-flex justify-content-center small text-warning mb-2">';
+    content += '<hr><p>Rating</p>';
+    content += ' <div class="bi-star-fill"></div> <div class="bi-star-fill"></div> <div class="bi-star-fill"></div>';
+    content += ' <div class="bi-star-fill"></div> <div class="bi-star-fill"></div></div>';
+    content += '</div></div>';
+    // closing modal-body
+    content += `<p class="text-left pl-2 ml-2 mb-0"> PRICE:$${currentItem.unitPrice}</p>`
+    content += `<div id="alertModal${item.id}"></div>`;
+    content += '<div class="modal-footer">'
+    content += '<button type="button" class="btn btn-secondary"data-dismiss="modal">Close</button>';
+    content += '</div></div></div></div>';
+
+    mainContainer.innerHTML += content;
+}
+
 // NOTE: CLEAR CART
 function clearCart(){
     document.getElementById('tableContainer').innerHTML = "";
@@ -314,21 +352,10 @@ function findItemById(itemId) {
     }
 }
 
-// REFACTOR: Takes item ID and display details of the matched item
-function showItemDetails(itemId) {
-    // TODO:  FOR CART
-    // REFACTOR:
-    for (let i = 0; i < cart.length; i++){
-        if(cart[i].id == itemId){
-            //initDetails( ,cart[i])
-        }
-    }
-    
-}
+
 
 // REFACTOR: Takes item ID and add selected item to the cart
 function addToCart(itemId) {
-    // TODO:
     
     let currentItem = findItemById(itemId);
     // DEBUG:
@@ -352,11 +379,11 @@ function addToCart(itemId) {
 
     }
 }
-
+// NOTE: function to reenable search button
 function enabledSearchBtn(){
     document.getElementById('btnSearch').className = "btn btn-outline-success mx-2";
 }
-
+// NOTE: Function to disable button
 function disableButton(idClass){
     document.getElementById(idClass).classList.add('disabled');
 }
@@ -379,13 +406,12 @@ function removeFromCart(itemId) {
 }
 
 // REFACTOR: 
-
 function searchByKeyWord() {
     // TODO:
     let input, value;
     input = document.getElementById('searchInput');
     value = input.value.toLowerCase();
-    let isFound = false;
+
     let filteredItems = catalogs.filter((items) => {
     
     return (items.category.categoryName.toLowerCase().includes(value) ||
@@ -393,20 +419,14 @@ function searchByKeyWord() {
         items.description.toLowerCase().includes(value))
     });
 
-    if(filteredItems.length >= 0){
-        showStatusMessageClosable("alert-success","FOUND!","item(s) available",'searchAlert');
-    }
-
-    showListOfItemsFiltered(filteredItems);
-
     if (filteredItems.length == 0){
     showStatusMessageClosable("alert-warning","Invalid",value+" doesn't exist!",'searchAlert');
     resetContainer();
     showListOfItems();
     }
-  
-}
+    showListOfItemsFiltered(filteredItems);
 
+}
 
 // NOTE: disable ENTER key entry
 $(function() {
@@ -414,7 +434,6 @@ $(function() {
 })
 
 // REFACTOR:
-
 // NOTE: Sets up the webpage for the user: Used onLoad body event.
 function setUpCart() {
     resetContainer();
@@ -422,14 +441,11 @@ function setUpCart() {
     initializeCategories();
     initializeItems();
     showListOfItems();
-    
-    //showOrHideContainer('flex');
-    // NOTE: INITIALIZE number of items in the cart;
     initNumItemsInCart();
-   //hideStatusMessage();
 
 }
 
+// NOTE: function to increment number of items in the cart icon
 function initNumItemsInCart(){
     document.getElementById('numItemsInCart').textContent = itemCounter;
 }
