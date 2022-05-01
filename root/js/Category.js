@@ -127,7 +127,7 @@ function showListOfItems() {
         content += '</div></div>';
         content += '<div class="card-footer p-2 pt-0 border-top-0 bg-transparent">';
         content += `<div class="text-center"><button id="${item.id}" class="btn btn-outline-dark mt-auto" onclick="addToCart(${item.id})">Add to Cart</button></div></div>`;
-        content += `<div id="moreDetails${i}" class="row"></div>`;
+        content += `<div id="moreDetails${i}" class="p-0  m-0"></div>`;
         content += '</div></div>'
 
         mainContainer.innerHTML += content;
@@ -153,7 +153,7 @@ function showListOfItemsFiltered(array) {
         content += '</div></div>';
         content += '<div class="card-footer p-2 pt-0 border-top-0 bg-transparent">';
         content += `<div class="text-center"><button id="${item.id}" class="btn btn-outline-dark mt-auto" onclick="addToCart(${item.id})">Add to Cart</button></div></div>`;
-        content += `<div id="moreDetails${i}" class="row"></div>`;
+        content += `<div id="moreDetails${i}" class="p-0  m-0"></div>`;
         content += '</div></div>'
 
         mainContainer.innerHTML += content;
@@ -166,8 +166,8 @@ function showListOfItemsFiltered(array) {
 function initDetails(htmlID, item){
     let currentItem = item;
     let mainContainer = document.getElementById(htmlID);
-    let content = `<button type="button" class="text-right bg-transparent border-0" data-toggle="modal" data-target="#modalNum${currentItem.id}">`;
-    content += ' <i class="bi-question-circle-fill px-2 "></i></button>';
+    let content = `<button type="button" class="float-right pr-2 bg-transparent border-0" data-toggle="modal" data-target="#modalNum${currentItem.id}">`;
+    content += ' <i class="bi-question-circle-fill px-1 "></i></button>';
     // NOTE: MODAL body
     content += `<div class="modal fade" id="modalNum${currentItem.id}" tabindex="-1" role="dialog"aria-labelledby="exampleModalCenterTitle" aria-hidden="true">`;
     content += '<div class="modal-dialog modal-dialog-centered" role="document">';
