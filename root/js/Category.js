@@ -2,12 +2,9 @@
 var categories = [];
 var catalogs = [];
 var cart = []; // NOTE: Represents shopping cart, Add items here when user add it to the cart.
-
 // NOTE: increment or decrement number of items in the cart
 var itemCounter = 0;
-
 var productImagesFolder = 'images/productImages/image';
-
 
 
 // NOTE: constructor function for Category
@@ -122,13 +119,13 @@ function showListOfItems() {
 
     for (let i = 1; i < catalogs.length; i++) {
         let item = catalogs[i - 1];
-        let content = '<div class="col mb-5"><div class="card ">';
-        content += `<img class="card-img-top p-3" src="${item.thumbnail+item.id}.jpg" alt="..." />`;
-        content += '<div class="card-body p-4 "><i class="fa fa-heart-o" aria-hidden="true"></i>';
+        let content = '<div class=" mb-5"><div class="card shadow p3 mb-5 bg-white rounded">';
+        content += `<img class="card-img-top w-100 p-3" src="${item.thumbnail+item.id}.jpg" alt="..." />`;
+        content += '<div class="card-body p-2 "><i class="fa fa-heart-o" aria-hidden="true"></i>';
         content += `<div class="text-center"><h5 id="priceTag${i}" class="fw-bolder">${item.title}</h5><p class="font-italic text-monospace p-0 m-0 mb-1">"${item.category.categoryName}"</p>$${item.unitPrice}`;
         content += `<p id="quantity${item.id}" class="small">Quantity: ${item.quantity} </p>`
         content += '</div></div>';
-        content += '<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">';
+        content += '<div class="card-footer p-2 pt-0 border-top-0 bg-transparent">';
         content += `<div class="text-center"><button id="${item.id}" class="btn btn-outline-dark mt-auto" onclick="addToCart(${item.id})">Add to Cart</button></div></div>`;
         content += `<div id="moreDetails${i}" class="row"></div>`;
         content += '</div></div>'
@@ -140,7 +137,7 @@ function showListOfItems() {
     }
 }
 
-// NOTE FIltered Items
+// NOTE: FIltered Items
 function showListOfItemsFiltered(array) {
 
     resetContainer();
@@ -148,13 +145,13 @@ function showListOfItemsFiltered(array) {
     let mainContainer = document.getElementById('divContainer');
     for (let i = 1, j = 0; j < array.length; i++, j++) {
         let item = array[i - 1];
-        let content = '<div class="col mb-5"><div class="card ">';
+        let content = '<div class="col mb-5"><div class="card shadow p3 mb-5 bg-white rounded ">';
         content += `<img class="card-img-top p-3" src="${item.thumbnail+item.id}.jpg" alt="..." />`;
-        content += '<div class="card-body p-4 "><i class="fa fa-heart-o" aria-hidden="true"></i>';
+        content += '<div class="card-body p-2 "><i class="fa fa-heart-o" aria-hidden="true"></i>';
         content += `<div class="text-center"><h5 id="priceTag${item.id}" class="fw-bolder">${item.title}</h5><p class="font-italic text-monospace p-0 m-0 mb-1">"${item.category.categoryName}"</p>$${item.unitPrice}`;
         content += `<p id="quantity${item.id}" class="small">Quantity: ${item.quantity} </p>`
         content += '</div></div>';
-        content += '<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">';
+        content += '<div class="card-footer p-2 pt-0 border-top-0 bg-transparent">';
         content += `<div class="text-center"><button id="${item.id}" class="btn btn-outline-dark mt-auto" onclick="addToCart(${item.id})">Add to Cart</button></div></div>`;
         content += `<div id="moreDetails${i}" class="row"></div>`;
         content += '</div></div>'
@@ -185,13 +182,13 @@ function initDetails(htmlID, item){
     content += `<p class="card-text p-0 m-0">Description:${currentItem.description}</p>`;
     content += `<p class="card-text p-0 m-0">Publisher:${currentItem.make}</p>`;
     content += `<p class="card-text p-0 m-0">Category:${currentItem.category.categoryName}</p>`;
-    // RATING
+    //NOTE: RATING
     content += '<div class="d-flex justify-content-center small text-warning mb-2">';
     content += '<hr><p>Rating</p>';
     content += ' <div class="bi-star-fill"></div> <div class="bi-star-fill"></div> <div class="bi-star-fill"></div>';
     content += ' <div class="bi-star-fill"></div> <div class="bi-star-fill"></div></div>';
     content += '</div></div>';
-    // closing modal-body
+    //NOTE: closing modal-body
     content += `<p class="text-left pl-2 ml-2 mb-0"> PRICE:$${currentItem.unitPrice}</p>`
     content += `<div id="alertModal${item.id}"></div>`;
     content += '<div class="modal-footer">'
@@ -203,7 +200,7 @@ function initDetails(htmlID, item){
 
 }
 
-// REFACTOR: Displays alert based on user interaction
+// NOTE: Displays alert based on user interaction
 var timeOutForMsg = 5000;
 function showStatusMessage(cssClass, header, messageToDisplay, priceID) {
 
@@ -212,7 +209,7 @@ function showStatusMessage(cssClass, header, messageToDisplay, priceID) {
     content +=  `<strong>${header}</strong>${messageToDisplay}`;
     content += ' <button type="button" class="close" data-dismiss="alert" aria-label="Close"></div>';
 
-    mainContainer.innerHTML += content;
+    mainContainer.innerHTML = content;
 
    setTimeout(function(){
        $('.alert').alert('close')
@@ -230,25 +227,14 @@ function showStatusMessageClosable(cssClass, header, messageToDisplay, idClass) 
     content += '<span aria-hidden="true">&times;</span></button></div>';
 
     container.innerHTML += content;
+
+    setTimeout(function(){
+        $('.alert').alert('close')
+    },3000);
   
 
 }
 
-// NOTE: FOR MODALS
-function showStatusMessageModal(idClass, header, messageToDisplay, cssClass) {
-    // DOCS: idClass = id, header = Title, message = alert message, cssClass = css for 
-    let mainContainer = document.getElementById(idClass);
-    let content = `<div id="alert" class="alert ${cssClass} alert-dismissible fade show h-auto small my-1 py-1" role="alert">`;
-    content +=  `<strong>${header}</strong>${messageToDisplay}`;
-    content += ' <button type="button" class="close" data-dismiss="alert" aria-label="Close"></div>';
-
-    mainContainer.innerHTML += content;
-
-   setTimeout(function(){
-       $('.alert').alert('close')
-   },timeOutForMsg);
-   
-}
 
 // REFACTOR: Hides status alert
 function hideStatusMessage() {
@@ -282,13 +268,15 @@ function showItemInCart(){
         let table = `<tr><th scope="row">${item.id}</th><td>${item.title}</td>`;
         table += `<td>${item.description}</td><td>$${item.unitPrice}</td>`;
         table += `<td class="w-25 col-sm-"><img class="w-25 col-sm-" src="${item.thumbnail}${item.id}.jpg" alt=""></td>`;
-        table += `<td id="moreDetails${item.id}" class="w-25"><button class="btn btn-danger ">REMOVE</button>`;
+        table += `<td id="moreDetails" class="w-25"><button class="btn btn-danger ">REMOVE</button>`;
+        table += `<button   type="button" class="btn btn-info mx-2" data-toggle="modal" data-target="#modalNum${item.id}">`;
+        table += 'DETAILS</button>';
         table += '</td></tr>';
         
         
         tableBody.innerHTML += table;
         // DEBUG:
-        showItemDetails(`moreDetails${item.id}`,item)
+        showItemDetails('moreDetails',item)
         console.log("this is inside the cart " + item.id);
     }
 }
@@ -297,10 +285,8 @@ function showItemInCart(){
 function showItemDetails(htmlID,item) {
 let currentItem = item;
     let mainContainer = document.getElementById(htmlID);
-    let content = `<button type="button" class="btn btn-info mx-2" data-toggle="modal" data-target="#modalNum${currentItem.id}">`;
-    content += 'DETAILS</button>';
     // NOTE: MODAL body
-    content += `<div class="modal fade" id="modalNum${currentItem.id}" tabindex="-1" role="dialog"aria-labelledby="exampleModalCenterTitle" aria-hidden="true">`;
+    let content = `<div class="modal fade" id="modalNum${currentItem.id}" tabindex="-1" role="dialog"aria-labelledby="exampleModalCenterTitle" aria-hidden="true">`;
     content += '<div class="modal-dialog modal-dialog-centered" role="document">';
     content += '<div class="modal-content"><div class="modal-header">';
     content += `<h5 class="modal-title" id="exampleModalLongTitle">${currentItem.title}</h5>`;
@@ -332,6 +318,12 @@ let currentItem = item;
 // NOTE: CLEAR CART
 function clearCart(){
     document.getElementById('tableContainer').innerHTML = "";
+}
+
+// NOTE: Rmove items in cart
+// REFACTOR: Takes item ID and remove the selected item from the cart
+function removeFromCart(itemId) {
+    
 }
 
 // NOTE: showOrHideTable
@@ -400,10 +392,7 @@ function updateItemsInCart(op){
     
 }
 
-// REFACTOR: Takes item ID and remove the selected item from the cart
-function removeFromCart(itemId) {
-    // TODO:
-}
+
 
 // REFACTOR: 
 function searchByKeyWord() {
@@ -425,6 +414,7 @@ function searchByKeyWord() {
     showListOfItems();
     }
     showListOfItemsFiltered(filteredItems);
+    input.value = '';
 
 }
 
