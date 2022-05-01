@@ -3,6 +3,9 @@ var categories = [];
 var catalogs = [];
 var cart = []; // NOTE: Represents shopping cart, Add items here when user add it to the cart.
 
+// NOTE: increment or decrement number of items in the cart
+var itemCounter = 0;
+
 var productImagesFolder = 'images/productImages/image';
 
 
@@ -59,30 +62,30 @@ function initializeItems() {
 
     // NOTE: Creates instances of Items
 
-    const item1 = new Item(1, 'Child Play', 'A child playing beside the fountain', 'Jeffrey Grospe', 250.00, 2, 'Unsplash', `${productImagesFolder}`, categories[0]);
-    const item2 = new Item(2, 'Gloomy Snow', 'A car stuck in the middle of a snow storm', 'Jeffrey Grospe', 200.00, 5, 'Unsplash', `${productImagesFolder}`, categories[0]);
-    const item3 = new Item(3, 'Match with Granny', 'An image full of matching pattern', 'Jeffrey Grospe', 300.00, 1, 'Unsplash', `${productImagesFolder}`, categories[0]);
-    const item4 = new Item(4, 'Old Italy', 'A street resembles the street of Italy', 'Jeffrey Grospe', 100.00, 2, 'Unsplash', `${productImagesFolder}`, categories[1]);
-    const item5 = new Item(5, 'Montreal Skyscrapers ', 'Be amaze of the futuristic look', 'Jeffrey Grospe', 120.00, 3, 'Unsplash', `${productImagesFolder}`, categories[1]);
-    const item6 = new Item(6, 'Bonsecour Market', 'A historical place in Montreal', 'Jeffrey Grospe', 10.00, 5, 'Unsplash', `${productImagesFolder}`, categories[1]);
+    const item1 = new Item(1, 'Child Play', 'A child playing beside the fountain', 'Jeffrey Grospe', 250.99, 2, 'Unsplash', `${productImagesFolder}`, categories[0]);
+    const item2 = new Item(2, 'Gloomy Snow', 'A car stuck in the middle of a snow storm', 'Jeffrey Grospe', 200.99, 5, 'Unsplash', `${productImagesFolder}`, categories[0]);
+    const item3 = new Item(3, 'Match with Granny', 'An image full of matching pattern', 'Jeffrey Grospe', 300.99, 1, 'Unsplash', `${productImagesFolder}`, categories[0]);
+    const item4 = new Item(4, 'Old Italy', 'A street resembles the street of Italy', 'Jeffrey Grospe', 100.99, 2, 'Unsplash', `${productImagesFolder}`, categories[1]);
+    const item5 = new Item(5, 'Montreal Skyscrapers ', 'Be amaze of the futuristic look', 'Jeffrey Grospe', 120.99, 3, 'Unsplash', `${productImagesFolder}`, categories[1]);
+    const item6 = new Item(6, 'Bonsecour Market', 'A historical place in Montreal', 'Jeffrey Grospe', 100.99, 5, 'Unsplash', `${productImagesFolder}`, categories[1]);
     const item7 = new Item(7, 'Healthy', 'Have a taste!', 'Broke Lark', 80.00, 2, 'Unsplash', `${productImagesFolder}`, categories[2]);
     const item8 = new Item(8, 'Piece of Cake', 'Cant help my self but crave', 'Anna Tukhfatullina', 80.00, 5, 'Unsplash', `${productImagesFolder}`, categories[2]);
     const item9 = new Item(9, 'Eggspectation', 'Serve with delight', 'Joseph Gonzalez', 80.00, 5, 'Unsplash', `${productImagesFolder}`, categories[2]);
-    const item10 = new Item(10, 'Mural and biker', 'A silhouette shot and a colorful background ', 'Jeffrey Grospe', 200.00, 2, 'Unsplash', `${productImagesFolder}`, categories[3]);
-    const item11 = new Item(11, 'Einstein', 'Mural art of Einstein', 'Jon Tyson', 150.00, 10, 'Unsplash', `${productImagesFolder}`, categories[3]);
-    const item12 = new Item(12, 'The Gf', 'Mural art, an image of a girl', 'Enzo Tommasi', 150.00, 5, 'Unsplash', `${productImagesFolder}`, categories[3]);
-    const item13 = new Item(13, 'Willo', 'The king of fashion', 'Jeffrey Grospe', 250.00, 4, 'Unsplash', `${productImagesFolder}`, categories[4]);
-    const item14 = new Item(14, 'Sam', 'The Queen of fashion', 'Jeffrey Grospe', 250.00, 4, 'Unsplash', `${productImagesFolder}`, categories[4]);
-    const item15 = new Item(15, 'Red', 'An image of a perfect girl', 'Jeffrey Grospe', 250.00, 4, 'Unsplash', `${productImagesFolder}`, categories[4]);
-    const item16 = new Item(16, 'Shadow Creature', 'This is a silhouette of someone walking in the tunnel', 'Jeffrey Grospe', 150.00, 2, 'Unsplash', `${productImagesFolder}`, categories[5]);
-    const item17 = new Item(17, 'Sun Set', 'My favorite capture of all time', 'Jeffrey Grospe', 2000.00, 1, 'Unsplash', `${productImagesFolder}`, categories[5]);
-    const item18 = new Item(18, 'Abstract', 'A reflected female silhouette', 'Jeffrey Grospe', 350.00, 6, 'Unsplash', `${productImagesFolder}`, categories[5]);
-    const item19 = new Item(19, 'Green Grass', 'Reconnect with the nature', 'Jeffrey Grospe', 350.00, 3, 'Unsplash', `${productImagesFolder}`, categories[6]);
-    const item20 = new Item(20, 'Pink flower', 'A bokeh shot of a flower', 'Jeffrey Grospe', 150.00, 7, 'Unsplash', `${productImagesFolder}`, categories[6]);
-    const item21 = new Item(21, 'Fast & Furious', 'A miniature cars', 'Jeffrey Grospe', 110.00, 8, 'Unsplash', `${productImagesFolder}`, categories[6]);
-    const item22 = new Item(22, 'White and Orange', 'Yellow leaves on a white canvas', 'Jeffrey Grospe', 150.00, 10, 'Unsplash', `${productImagesFolder}`, categories[7]);
-    const item23 = new Item(23, 'Fall colors', 'A calm and relaxing image', 'Jeffrey Grospe', 110.00, 7, 'Unsplash', `${productImagesFolder}`, categories[7]);
-    const item24 = new Item(24, 'Storm', 'This is a powerful image, a metaphor of destruction', 'Jeffrey Grospe', 450.00, 1, 'Unsplash', `${productImagesFolder}`, categories[7]);
+    const item10 = new Item(10, 'Mural and biker', 'A silhouette shot and a colorful background ', 'Jeffrey Grospe', 200.99, 2, 'Unsplash', `${productImagesFolder}`, categories[3]);
+    const item11 = new Item(11, 'Einstein', 'Mural art of Einstein', 'Jon Tyson', 150.99, 10, 'Unsplash', `${productImagesFolder}`, categories[3]);
+    const item12 = new Item(12, 'The Gf', 'Mural art, an image of a girl', 'Enzo Tommasi', 150.99, 5, 'Unsplash', `${productImagesFolder}`, categories[3]);
+    const item13 = new Item(13, 'Willo', 'The king of fashion', 'Jeffrey Grospe', 250.99, 4, 'Unsplash', `${productImagesFolder}`, categories[4]);
+    const item14 = new Item(14, 'Sam', 'The Queen of fashion', 'Jeffrey Grospe', 250.99, 4, 'Unsplash', `${productImagesFolder}`, categories[4]);
+    const item15 = new Item(15, 'Red', 'An image of a perfect girl', 'Jeffrey Grospe', 250.99, 4, 'Unsplash', `${productImagesFolder}`, categories[4]);
+    const item16 = new Item(16, 'Shadow Creature', 'This is a silhouette of someone walking in the tunnel', 'Jeffrey Grospe', 150.99, 2, 'Unsplash', `${productImagesFolder}`, categories[5]);
+    const item17 = new Item(17, 'Sun Set', 'My favorite capture of all time', 'Jeffrey Grospe', 2000.99, 1, 'Unsplash', `${productImagesFolder}`, categories[5]);
+    const item18 = new Item(18, 'Abstract', 'A reflected female silhouette', 'Jeffrey Grospe', 350.99, 6, 'Unsplash', `${productImagesFolder}`, categories[5]);
+    const item19 = new Item(19, 'Green Grass', 'Reconnect with the nature', 'Jeffrey Grospe', 350.99, 3, 'Unsplash', `${productImagesFolder}`, categories[6]);
+    const item20 = new Item(20, 'Pink flower', 'A bokeh shot of a flower', 'Jeffrey Grospe', 150.99, 7, 'Unsplash', `${productImagesFolder}`, categories[6]);
+    const item21 = new Item(21, 'Fast & Furious', 'A miniature cars', 'Jeffrey Grospe', 110.99, 8, 'Unsplash', `${productImagesFolder}`, categories[6]);
+    const item22 = new Item(22, 'White and Orange', 'Yellow leaves on a white canvas', 'Jeffrey Grospe', 150.99, 5, 'Unsplash', `${productImagesFolder}`, categories[7]);
+    const item23 = new Item(23, 'Fall colors', 'A calm and relaxing image', 'Jeffrey Grospe', 110.99, 7, 'Unsplash', `${productImagesFolder}`, categories[7]);
+    const item24 = new Item(24, 'Storm', 'This is a powerful image, a metaphor of destruction', 'Jeffrey Grospe', 450.99, 1, 'Unsplash', `${productImagesFolder}`, categories[7]);
 
     catalogs = [item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11,
         item12, item13, item14, item15, item16, item17, item18, item19, item20, item21, item22, item23, item24];
@@ -91,13 +94,15 @@ function initializeItems() {
 
 // REFACTOR:
 function clearContainer() {
-    //document.getElementById('divContainer').innerHTML = "";
-
     //DEBUG:
 
     // NOTE: Using display to hide elements
     showOrHideContainer('none');
     console.log("cleared container")
+}
+
+function resetContainer(){
+    document.getElementById('divContainer').innerHTML = "";
 }
 
 function showOrHideContainer(status){
@@ -118,11 +123,11 @@ function showListOfItems() {
         let content = '<div class="col mb-5"><div class="card ">';
         content += `<img class="card-img-top p-3" src="${item.thumbnail+item.id}.jpg" alt="..." />`;
         content += '<div class="card-body p-4 "><i class="fa fa-heart-o" aria-hidden="true"></i>';
-        content += `<div class="text-center"><h5 id="priceTag${i}" class="fw-bolder">${item.title}</h5>$${item.unitPrice}`;
-        content += `<p id="quantity${i}" class="small">Quantity: ${item.quantity} </p>`
+        content += `<div class="text-center"><h5 id="priceTag${i}" class="fw-bolder">${item.title}</h5><p class="font-italic text-monospace p-0 m-0 mb-1">"${item.category.categoryName}"</p>$${item.unitPrice}`;
+        content += `<p id="quantity${item.id}" class="small">Quantity: ${item.quantity} </p>`
         content += '</div></div>';
         content += '<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">';
-        content += `<div class="text-center"><button id="${i}" class="btn btn-outline-dark mt-auto" onclick="addToCart(${item.id})">Add to Cart</button></div></div>`;
+        content += `<div class="text-center"><button id="${item.id}" class="btn btn-outline-dark mt-auto" onclick="addToCart(${item.id})">Add to Cart</button></div></div>`;
         content += `<div id="moreDetails${i}" class="row"></div>`;
         content += '</div></div>'
 
@@ -130,10 +135,33 @@ function showListOfItems() {
         mainContainer.innerHTML += content;
         initDetails(`moreDetails${i}`,item);
         // DEBUG:
-        //console.log(`moreDetails${i}`);
-        
+        //console.log(`moreDetails${i}`);     
     }
-   
+}
+
+// NOTE FIltered Items
+function showListOfItemsFiltered(array) {
+
+    resetContainer();
+
+    let mainContainer = document.getElementById('divContainer');
+    for (let i = 1, j = 0; j < array.length; i++, j++) {
+        let item = array[i - 1];
+        let content = '<div class="col mb-5"><div class="card ">';
+        content += `<img class="card-img-top p-3" src="${item.thumbnail+item.id}.jpg" alt="..." />`;
+        content += '<div class="card-body p-4 "><i class="fa fa-heart-o" aria-hidden="true"></i>';
+        content += `<div class="text-center"><h5 id="priceTag${item.id}" class="fw-bolder">${item.title}</h5><p class="font-italic text-monospace p-0 m-0 mb-1">"${item.category.categoryName}"</p>$${item.unitPrice}`;
+        content += `<p id="quantity${item.id}" class="small">Quantity: ${item.quantity} </p>`
+        content += '</div></div>';
+        content += '<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">';
+        content += `<div class="text-center"><button id="${item.id}" class="btn btn-outline-dark mt-auto" onclick="addToCart(${item.id})">Add to Cart</button></div></div>`;
+        content += `<div id="moreDetails${i}" class="row"></div>`;
+        content += '</div></div>'
+
+        mainContainer.innerHTML += content;
+        initDetails(`moreDetails${i}`,item);
+           
+    }
 }
 
 // NOTE: populate viewDetails and show's details, item is an object
@@ -170,7 +198,6 @@ function initDetails(htmlID, item){
     content += `<button  onclick="addToCart(${item.id})" type="button" class="btn btn-success ">Buy</button>`;
     content += '</div></div></div></div>';
 
-   
     mainContainer.innerHTML += content;
 
 }
@@ -192,9 +219,23 @@ function showStatusMessage(cssClass, header, messageToDisplay, priceID) {
    
 }
 
+// NOTE: alert box with close function
+function showStatusMessageClosable(cssClass, header, messageToDisplay, idClass) {
+
+    let container = document.getElementById(idClass);
+    let content = `<div class="alert ${cssClass} alert-dismissible fade show p-1 m-0 d-flex justify-content-center" role="alert">`;
+    content += `<strong>${header}!</strong><p class="text-center pr-5 pl-2 m-0">${messageToDisplay}</p>`;
+    content += '<button type="button" class="close p-1" data-dismiss="alert" aria-label="Close">';
+    content += '<span aria-hidden="true">&times;</span></button></div>';
+
+    container.innerHTML += content;
+  
+
+}
+
 // NOTE: FOR MODALS
 function showStatusMessageModal(idClass, header, messageToDisplay, cssClass) {
-
+    // DOCS: idClass = id, header = Title, message = alert message, cssClass = css for 
     let mainContainer = document.getElementById(idClass);
     let content = `<div id="alert" class="alert ${cssClass} alert-dismissible fade show h-auto small my-1 py-1" role="alert">`;
     content +=  `<strong>${header}</strong>${messageToDisplay}`;
@@ -271,7 +312,8 @@ function findItemById(itemId) {
 
 // REFACTOR: Takes item ID and display details of the matched item
 function showItemDetails(itemId) {
-    // TODO:
+    // TODO:  FOR CART
+    // REFACTOR:
     for (let i = 0; i < cart.length; i++){
         if(cart[i].id == itemId){
             //initDetails( ,cart[i])
@@ -286,16 +328,17 @@ function addToCart(itemId) {
     
     let currentItem = findItemById(itemId);
     // DEBUG:
-    console.log(currentItem.quantity);
+    console.log("adding to cart " + currentItem.Test);
+    console.log("current quantity " + currentItem.quantity);
     if (currentItem.quantity > 0){
         showStatusMessage('alert-success', 'SUCCESS', ' item added !',currentItem.id);
         cart.push(currentItem);
         --currentItem.quantity;
-        // DEBUG:
-        console.log('size ' + cart.length);
         // NOTE: updates the value
        document.getElementById('quantity'+currentItem.id).innerHTML = 'Quantity: '+currentItem.quantity;
-       
+       // NOTE: Update number in the cart
+       updateItemsInCart('add');
+    
     } else{
         let btnClass = document.getElementById(itemId);
         // DEBUG:
@@ -305,6 +348,18 @@ function addToCart(itemId) {
 
     }
 }
+function updateItemsInCart(op){
+    switch (op){
+        case 'add':
+            itemCounter++;
+            break;
+        case 'minus':
+            itemCounter--;
+            break; 
+    }
+    document.getElementById('numItemsInCart').textContent = itemCounter;
+    
+}
 
 // REFACTOR: Takes item ID and remove the selected item from the cart
 function removeFromCart(itemId) {
@@ -312,11 +367,39 @@ function removeFromCart(itemId) {
 }
 
 // REFACTOR: 
+
 function searchByKeyWord() {
     // TODO:
+    let input, value;
+    input = document.getElementById('searchInput');
+    value = input.value.toLowerCase();
+    let isFound = false;
+    let filteredItems = catalogs.filter((items) => {
+    
+    return (items.category.categoryName.toLowerCase().includes(value) ||
+        items.title.toLowerCase().includes(value) ||
+        items.description.toLowerCase().includes(value))
+    });
+
+    if(isFound === true){
+        showStatusMessageClosable("alert-success","RESET","",'searchAlert');
+    }
+
+    showListOfItemsFiltered(filteredItems);
+
+    if (filteredItems.length == 0 && isFound){
+    showStatusMessageClosable("alert-warning","Invalid",value+" doesn't exist!",'searchAlert');
+    resetContainer();
+    showListOfItems();
+    }
+  
 }
 
 
+// NOTE: disable ENTER key entry
+$(function() {
+    $('form').submit(function() {return false;});
+})
 
 // REFACTOR:
 
@@ -326,8 +409,14 @@ function setUpCart() {
     initializeItems();
     showListOfItems();
     showOrHideContainer('flex');
+    // NOTE: INITIALIZE number of items in the cart;
+    initNumItemsInCart();
    //hideStatusMessage();
 
+}
+
+function initNumItemsInCart(){
+    document.getElementById('numItemsInCart').textContent = itemCounter;
 }
 
 // DEBUG: REFACTOR:

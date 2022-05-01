@@ -54,7 +54,7 @@
                 <button onclick="viewCart()" type="button" class="btn btn-outline-dark">
                     <i class="bi-cart-fill me-1"></i>
                     Cart
-                    <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                    <span id="numItemsInCart" class="badge bg-dark text-white ms-1 rounded-pill">0</span>
                 </button>
             </form>
         </div>
@@ -69,16 +69,16 @@
         </div>
     </header>
     <!-- Section-->
-    <section class="py-5">
+    <section  class="py-5">
         <!-- NOTE: Catalogue and search field-->
-        <div class="px-4 px-lg-5">
+        <div id="searchAlert" class="px-4 px-lg-5">
             <nav class="navbar navbar-light bg-light justify-content-between">
                 <button onclick="showOrHideContainer('flex')" type="button"
                     class="btn btn-outline-dark align-top">Catalogue</button>
-                <form class="form-inline">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search for items"
+                <form class="d-flex justify-content-start" >
+                    <input id="searchInput" class="form-control mr-sm-2" type="text" placeholder="Search for items"
                         aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0 float-end" type="submit">Search</button>
+                    <button type="button" onclick="searchByKeyWord()" class="btn btn-outline-success mx-2">Search <i class="fas fa-search-plus fa-sm"></i></button>
                 </form>
             </nav>
         </div>
