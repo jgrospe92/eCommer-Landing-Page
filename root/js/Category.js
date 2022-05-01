@@ -264,12 +264,14 @@ function showItemInCart(){
 
     mainContainer.innerHTML += content;
     let tableBody = document.getElementById('tableBody');
+    let counter = -1;
     for (const item of cart){
-        let table = `<tr><th scope="row">${item.id}</th><td>${item.title}</td>`;
+        counter++;
+        let table = `<tr id="cartIndex-${counter}"><th scope="row">${item.id}</th><td>${item.title}</td>`;
         table += `<td>${item.description}</td><td>$${item.unitPrice}</td>`;
         table += `<td class="w-25 col-sm-"><img class="w-25 col-sm-" src="${item.thumbnail}${item.id}.jpg" alt=""></td>`;
-        table += `<td id="moreDetails" class="w-25"><button class="btn btn-danger ">REMOVE</button>`;
-        table += `<button   type="button" class="btn btn-info mx-2" data-toggle="modal" data-target="#modalNum${item.id}">`;
+        table += `<td id="moreDetails" class="w-25"><button onclick="removeFromCart(${counter})" class="btn btn-danger ">REMOVE</button>`;
+        table += `<button type="button" class="btn btn-info mx-2" data-toggle="modal" data-target="#modalNum${item.id}">`;
         table += 'DETAILS</button>';
         table += '</td></tr>';
         
@@ -278,6 +280,7 @@ function showItemInCart(){
         // DEBUG:
         showItemDetails('moreDetails',item)
         console.log("this is inside the cart " + item.id);
+        console.log("counting incex" + counter);
     }
 }
 // NOTE: viewDEtails in cart
@@ -322,8 +325,13 @@ function clearCart(){
 
 // NOTE: Rmove items in cart
 // REFACTOR: Takes item ID and remove the selected item from the cart
-function removeFromCart(itemId) {
-    
+function removeFromCart(index) {
+    document.getElementById('cartIndex-'+index).remove();
+    console.log('cartIndex-'+index);
+    cart.splice(index--,1);
+    updateItemsInCart('minus');
+    showStatusMessageClosable("alert-info","OUCH!!!"," Item removed!",'searchAlert');
+   
 }
 
 // NOTE: showOrHideTable
@@ -350,9 +358,7 @@ function findItemById(itemId) {
 function addToCart(itemId) {
     
     let currentItem = findItemById(itemId);
-    // DEBUG:
-    console.log("adding to cart " + currentItem.Test);
-    console.log("current quantity " + currentItem.quantity);
+
     if (currentItem.quantity > 0){
         showStatusMessage('alert-success', 'SUCCESS', ' item added !',currentItem.id);
         cart.push(currentItem);
