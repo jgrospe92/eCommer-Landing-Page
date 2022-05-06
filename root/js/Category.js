@@ -1,7 +1,8 @@
 // NOTE: Global variable Arrays for Categories, catalog and cart;
 var categories = [];
 var catalogs = [];
-var cart = []; // NOTE: Represents shopping cart, Add items here when user add it to the cart.
+// NOTE: Represents shopping cart, Add items here when user add it to the cart.
+var cart = []; 
 // NOTE: increment or decrement number of items in the cart
 var itemCounter = 0;
 var productImagesFolder = 'images/productImages/image';
@@ -91,13 +92,12 @@ function initializeItems() {
 
 // REFACTOR:
 function clearContainer() {
-    //DEBUG:
-
     // NOTE: Using display to hide elements
     showOrHideContainer('none');
     console.log("cleared container")
 }
 
+// NOTE: function to remove child nodes of divContainer
 function resetContainer(){
     document.getElementById('divContainer').innerHTML = "";
 }
@@ -105,11 +105,12 @@ function resetContainer(){
 function showOrHideContainer(status){
     var container = document.getElementById('divContainer');
     container.style.display = status
-    //showOrHideTable('none');
+   
 
 }
 
-// REFACTOR: A dummy function
+// REFACTOR:
+// NOTE: show all items inside the catalog array
 function showListOfItems() {
     clearCart();
     resetContainer();
@@ -131,9 +132,7 @@ function showListOfItems() {
         content += '</div></div>'
 
         mainContainer.innerHTML += content;
-        initDetails(`moreDetails${i}`,item);
-        // DEBUG:
-        //console.log(`moreDetails${i}`);     
+        initDetails(`moreDetails${i}`,item);  
     }
 }
 
@@ -252,16 +251,22 @@ function viewCart() {
     clearCart();
     showItemInCart();
     disableButton('btnSearch');
+
+    if(cart.length == 0){
+        disableButton('checkoutBtn');
+    }
 }
 // NOTE: SHORT item in cart
 function showItemInCart(){
     resetContainer();
+    let total = totalPrice();
     let mainContainer = document.getElementById('tableContainer');
     let content = '<div id="cart-table"><table class="table table-striped">';
         content += '<thead><tr><th scope="col">Item ID</th><th scope="col">Title</th>';
         content += '<th scope="col">Description</th><th scope="col">Price</th><th scope="col" class="">Display</th>';
-        content += '<th scope="col"></th></tr></thead><tbody id="tableBody"></tbody></div></div>';
-
+        content += '<th scope="col"></th></tr></thead><tbody id="tableBody"></tbody></table></div>';
+        content += `<div class="float-right"><span id="priceToPay" class="align-middle p-2">Total:$${total}</span>`;
+        content += `<button id="checkoutBtn" type="button" onclick="alertCheckout()" class="btn btn-success btn-sm ml-2">Checkout</button></div></div>`;
     mainContainer.innerHTML += content;
     let tableBody = document.getElementById('tableBody');
     let counter = -1;
@@ -270,19 +275,42 @@ function showItemInCart(){
         let table = `<tr id="cartIndex-${counter}"><th scope="row">${item.id}</th><td>${item.title}</td>`;
         table += `<td>${item.description}</td><td>$${item.unitPrice}</td>`;
         table += `<td class="w-25 col-sm-"><img class="img-thumbnail col-sm-" src="${item.thumbnail}${item.id}.jpg" alt=""></td>`;
-        table += `<td id="moreDetails" class="w-25"><button onclick="removeFromCart(${counter})" class="btn btn-danger ">REMOVE</button>`;
+        table += `<td id="moreDetails" class="w-25"><button onclick="removeFromCart(${counter});" class="btn btn-danger ">REMOVE</button>`;
         table += `<button type="button" class="btn btn-info mx-2" data-toggle="modal" data-target="#modalNum${item.id}">`;
         table += 'DETAILS</button>';
         table += '</td></tr>';
         
         
         tableBody.innerHTML += table;
-        // DEBUG:
         showItemDetails('moreDetails',item)
-        console.log("this is inside the cart " + item.id);
-        console.log("counting incex" + counter);
     }
 }
+// NOTE calculate total unit price items in cart
+function totalPrice(){
+    var total = 0.00;
+    for (item of cart){
+        total += item.unitPrice;
+    }
+    return total;
+}
+// NOTE: updates the total price when its remove from the cart
+function updatePrice(){
+    document.getElementById('priceToPay').textContent = 'Total:$'+totalPrice();
+}
+
+// NOTE: message to display when user click checkout
+function alertCheckout(){
+    alert("Thank you for your purchase! Have a great day");
+    document.getElementById('numItemsInCart').textContent = 0;
+    itemCounter = 0;
+    cart = [];
+    clearCart();
+    showItemInCart();
+    if(cart.length == 0){
+        disableButton('checkoutBtn');
+    }
+}
+
 // NOTE: viewDEtails in cart
 // REFACTOR: Takes item ID and display details of the matched item
 function showItemDetails(htmlID,item) {
@@ -323,21 +351,16 @@ function clearCart(){
     document.getElementById('tableContainer').innerHTML = "";
 }
 
-// NOTE: Rmove items in cart
+// NOTE: Remove items in cart
 // REFACTOR: Takes item ID and remove the selected item from the cart
 function removeFromCart(index) {
     document.getElementById('cartIndex-'+index).remove();
     console.log('cartIndex-'+index);
     cart.splice(index--,1);
     updateItemsInCart('minus');
+    updatePrice();
     showStatusMessageClosable("alert-info","OUCH!!!"," Item removed!",'searchAlert');
    
-}
-
-// NOTE: showOrHideTable
-function showOrHideTable(status){
-    var tableElement = document.getElementById('cart-table');
-    tableElement.style.display = status;
 }
 
 // REFACTOR: Find item using Id in the catalog array. Returns the matched item
@@ -345,8 +368,6 @@ function findItemById(itemId) {
     // TODO:
     for (const element of catalogs){
         if(itemId == element.id){
-            // DEBUG:
-            console.log("ID: "+element.id+ " TITLE: " + element.title )
             return element;
         }
     }
@@ -385,6 +406,7 @@ function enabledSearchBtn(){
 function disableButton(idClass){
     document.getElementById(idClass).classList.add('disabled');
 }
+// Function to perform addition or subtraction
 function updateItemsInCart(op){
     switch (op){
         case 'add':
@@ -446,5 +468,5 @@ function initNumItemsInCart(){
     document.getElementById('numItemsInCart').textContent = itemCounter;
 }
 
-// DEBUG: REFACTOR:
+// DEBUG: REFACTOR: This runs as soon as the page loads
 window.addEventListener("load", setUpCart());
