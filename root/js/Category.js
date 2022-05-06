@@ -269,7 +269,7 @@ function showItemInCart(){
         counter++;
         let table = `<tr id="cartIndex-${counter}"><th scope="row">${item.id}</th><td>${item.title}</td>`;
         table += `<td>${item.description}</td><td>$${item.unitPrice}</td>`;
-        table += `<td class="w-25 col-sm-"><img class="w-25 col-sm-" src="${item.thumbnail}${item.id}.jpg" alt=""></td>`;
+        table += `<td class="w-25 col-sm-"><img class="img-thumbnail col-sm-" src="${item.thumbnail}${item.id}.jpg" alt=""></td>`;
         table += `<td id="moreDetails" class="w-25"><button onclick="removeFromCart(${counter})" class="btn btn-danger ">REMOVE</button>`;
         table += `<button type="button" class="btn btn-info mx-2" data-toggle="modal" data-target="#modalNum${item.id}">`;
         table += 'DETAILS</button>';
