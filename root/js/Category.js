@@ -122,7 +122,7 @@ function showListOfItems() {
         let item = catalogs[i - 1];
         let content = '<div class=" mb-5"><div class="card shadow p3 mb-5 bg-white rounded">';
         content += `<img class="card-img-top w-100 p-3" src="${item.thumbnail+item.id}.jpg" alt="..." />`;
-        content += '<div class="card-body p-2 "><i class="fa fa-heart-o" aria-hidden="true"></i>';
+        content += `<div class="card-body p-2 "><i id="heart${i}" class="fa fa-heart-o" onclick="toggleHeart(${i})"  aria-hidden="true"></i>`;
         content += `<div class="text-center"><h5 id="priceTag${i}" class="fw-bolder">${item.title}</h5><p class="font-italic text-monospace p-0 m-0 mb-1">"${item.category.categoryName}"</p>$${item.unitPrice}`;
         content += `<p id="quantity${item.id}" class="small">Quantity: ${item.quantity} </p>`
         content += '</div></div>';
@@ -133,6 +133,18 @@ function showListOfItems() {
 
         mainContainer.innerHTML += content;
         initDetails(`moreDetails${i}`,item);  
+    }
+}
+
+
+// NOTE: toggle class for heart icons
+function toggleHeart(index){
+    var element = document.getElementById("heart"+index);
+    if (element.className === "fa fa-heart-o") {
+        element.className = "fa fa-heart";
+    }
+    else {
+        element.className = "fa fa-heart-o";
     }
 }
 
