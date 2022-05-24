@@ -273,8 +273,8 @@ function showItemInCart(){
     resetContainer();
     let total = totalPrice();
     let mainContainer = document.getElementById('tableContainer');
-    let content = '<div id="cart-table"><table class="table table-striped">';
-        content += '<thead><tr><th scope="col">Item ID</th><th scope="col">Title</th>';
+    let content = '<div id="cart-table"><table class="table-sm table-responsive-sm table table-striped">';
+        content += '<thead class="table-dark"><tr><th scope="col">Item ID</th><th scope="col">Title</th>';
         content += '<th scope="col">Description</th><th scope="col">Price</th><th scope="col" class="">Display</th>';
         content += '<th scope="col"></th></tr></thead><tbody id="tableBody"></tbody></table></div>';
         content += `<div class="float-right"><span id="priceToPay" class="align-middle p-2">Total:$${total}</span>`;
@@ -287,7 +287,7 @@ function showItemInCart(){
         let table = `<tr id="cartIndex-${counter}"><th scope="row">${item.id}</th><td>${item.title}</td>`;
         table += `<td>${item.description}</td><td>$${item.unitPrice}</td>`;
         table += `<td class="w-25 col-sm-"><img class="img-thumbnail col-sm-" src="${item.thumbnail}${item.id}.jpg" alt=""></td>`;
-        table += `<td id="moreDetails" class="w-25"><button onclick="removeFromCart(${counter});" class="btn btn-danger ">REMOVE</button>`;
+        table += `<td id="moreDetails" class="text-right"><button onclick="removeFromCart(${counter});" class="btn btn-danger ">REMOVE</button>`;
         table += `<button type="button" class="btn btn-info mx-2" data-toggle="modal" data-target="#modalNum${item.id}">`;
         table += 'DETAILS</button>';
         table += '</td></tr>';
