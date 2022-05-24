@@ -287,7 +287,7 @@ function showItemInCart(){
         let table = `<tr id="cartIndex-${counter}"><th scope="row">${item.id}</th><td>${item.title}</td>`;
         table += `<td>${item.description}</td><td>$${item.unitPrice}</td>`;
         table += `<td class="w-25 col-sm-"><img class="img-thumbnail col-sm-" src="${item.thumbnail}${item.id}.jpg" alt=""></td>`;
-        table += `<td id="moreDetails" class="text-center"><button onclick="removeFromCart(${counter});" class="btn btn-danger mb-2">REMOVE</button>`;
+        table += `<td id="moreDetails" class="text-center"><button onclick="removeFromCart(${counter});" class="mb-2 mb-lg-0 btn btn-danger ">REMOVE</button>`;
         table += `<button type="button" class="btn btn-info mx-2" data-toggle="modal" data-target="#modalNum${item.id}">`;
         table += 'DETAILS</button>';
         table += '</td></tr>';
